@@ -1,3 +1,7 @@
 package khudiakov.kirill.sharedtodolist.repository
 
-class Repository {}
+class Repository {
+    fun getListsOverview() {
+
+    }
+}

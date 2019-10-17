@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "863307448984",
+    "firebase_url": "https://khudiakov-shared-to-do-list.firebaseio.com",
+    "project_id": "khudiakov-shared-to-do-list",
+    "storage_bucket": "khudiakov-shared-to-do-list.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863307448984:android:7a5266186b7e15335186ed",
+        "android_client_info": {
+          "package_name": "khudiakov.kirill.sharedtodolist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863307448984-mf4no172pb431r9vnamt3lu6p5tpaoqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMChlq9XJl10FJSXsljNLP97sKi9uVPUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863307448984-mf4no172pb431r9vnamt3lu6p5tpaoqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
