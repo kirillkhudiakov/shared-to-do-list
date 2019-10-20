@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import khudiakov.kirill.sharedtodolist.R
+import khudiakov.kirill.sharedtodolist.databinding.OverviewFragmentBinding
 
 class OverviewFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = OverviewFragment()
-    }
 
     private lateinit var viewModel: OverviewViewModel
 
@@ -21,13 +20,18 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.overview_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(OverviewViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+        val binding: OverviewFragmentBinding = DataBindingUtil.inflate(
+            inflater, R.layout.overview_fragment, container, false
+        )
 
+        val viewManager = LinearLayoutManager(activity)
+        val viewAdapter = OverviewListAdapter(listOf())
+        binding.overviewList.apply {
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
+
+        return binding.root
+    }
 }
