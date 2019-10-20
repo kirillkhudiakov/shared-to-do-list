@@ -50,6 +50,10 @@ dependencies {
 
     // Authentication
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+
+    // Room
+    implementation "androidx.room:room-runtime:2.2.0"
+    annotationProcessor "androidx.room:room-compiler:2.2.0"
 }
 
 apply plugin: 'com.google.gms.google-services'
