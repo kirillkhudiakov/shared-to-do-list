@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import khudiakov.kirill.sharedtodolist.R
+import khudiakov.kirill.sharedtodolist.database.TodoDatabase
 import khudiakov.kirill.sharedtodolist.databinding.OverviewFragmentBinding
 
 class OverviewFragment : Fragment() {
@@ -20,7 +21,16 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(this).get(OverviewViewModel::class.java)
+
+        val application = requireNotNull(this.activity).application
+        val database = TodoDatabase.getInstance(application)
+
+        val todoDao = database.todoDao
+        val todoListDao = database.todoListDao
+
+        val viewModelFactory = OverviewViewModelFactory(todoDao, todoListDao)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(OverviewViewModel::class.java)
+
         val binding: OverviewFragmentBinding = DataBindingUtil.inflate(
             inflater, R.layout.overview_fragment, container, false
         )

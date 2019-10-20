@@ -2,12 +2,11 @@ package khudiakov.kirill.sharedtodolist.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import khudiakov.kirill.sharedtodolist.database.TodoList
 import khudiakov.kirill.sharedtodolist.databinding.OverviewListItemBinding
-import khudiakov.kirill.sharedtodolist.repository.ListOverview
 
-class OverviewListAdapter(private val dataset: List<ListOverview>) :
+class OverviewListAdapter(private val dataset: List<TodoList>) :
     RecyclerView.Adapter<OverviewListAdapter.OverviewViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OverviewViewHolder {
@@ -24,9 +23,9 @@ class OverviewListAdapter(private val dataset: List<ListOverview>) :
     class OverviewViewHolder private constructor(private val binding: OverviewListItemBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: ListOverview) {
-            binding.listName.text = item.name
-            binding.listScore.text = item.score
+        fun bind(item: TodoList) {
+            binding.listName.text = item.listName
+            binding.listScore.text = item.totalItems.toString()
         }
 
         companion object {

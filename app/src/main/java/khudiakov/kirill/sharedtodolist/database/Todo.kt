@@ -10,10 +10,8 @@ class Todo {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L
 
-    @ColumnInfo
     var todoName: String = ""
 
-    @ColumnInfo
     var completed: Boolean = false
 
     @ColumnInfo(name = "list_id")
