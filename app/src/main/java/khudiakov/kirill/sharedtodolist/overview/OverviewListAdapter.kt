@@ -2,23 +2,23 @@ package khudiakov.kirill.sharedtodolist.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import khudiakov.kirill.sharedtodolist.database.TodoList
 import khudiakov.kirill.sharedtodolist.databinding.OverviewListItemBinding
 
-class OverviewListAdapter(private val dataset: List<TodoList>) :
-    RecyclerView.Adapter<OverviewListAdapter.OverviewViewHolder>() {
+class OverviewListAdapter :
+    ListAdapter<TodoList, OverviewListAdapter.OverviewViewHolder>(TodoListDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OverviewViewHolder {
         return OverviewViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: OverviewViewHolder, position: Int) {
-        val item = dataset[position]
+        val item = getItem(position)
         holder.bind(item)
     }
-
-    override fun getItemCount(): Int = dataset.size
 
     class OverviewViewHolder private constructor(private val binding: OverviewListItemBinding) :
             RecyclerView.ViewHolder(binding.root) {
@@ -36,4 +36,15 @@ class OverviewListAdapter(private val dataset: List<TodoList>) :
             }
         }
     }
+}
+
+class TodoListDiffCallback : DiffUtil.ItemCallback<TodoList>() {
+    override fun areItemsTheSame(oldItem: TodoList, newItem: TodoList): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: TodoList, newItem: TodoList): Boolean {
+        return oldItem == newItem
+    }
+
 }

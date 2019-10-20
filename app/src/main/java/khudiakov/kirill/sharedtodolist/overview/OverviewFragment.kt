@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import khudiakov.kirill.sharedtodolist.R
@@ -24,11 +25,9 @@ class OverviewFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val database = TodoDatabase.getInstance(application)
-
-        val todoDao = database.todoDao
         val todoListDao = database.todoListDao
 
-        val viewModelFactory = OverviewViewModelFactory(todoDao, todoListDao)
+        val viewModelFactory = OverviewViewModelFactory(todoListDao)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(OverviewViewModel::class.java)
 
         val binding: OverviewFragmentBinding = DataBindingUtil.inflate(
@@ -36,11 +35,15 @@ class OverviewFragment : Fragment() {
         )
 
         val viewManager = LinearLayoutManager(activity)
-        val viewAdapter = OverviewListAdapter(listOf())
+        val viewAdapter = OverviewListAdapter()
         binding.overviewList.apply {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
+        viewModel.lists.observe(this, Observer {
+            viewAdapter.submitList(it)
+        })
 
         return binding.root
     }
