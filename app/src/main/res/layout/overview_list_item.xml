@@ -3,12 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="clickListener"
+            type="khudiakov.kirill.sharedtodolist.util.ClickListener" />
+        <variable
+            name="list"
+            type="khudiakov.kirill.sharedtodolist.database.TodoList" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp" >
+        android:paddingBottom="16dp"
+        android:onClick="@{() -> clickListener.onClick(list)}">
 
         <TextView
             android:id="@+id/list_name"
@@ -17,6 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:text="@{list.listName}"
             tools:text="List Name" />
 
         <TextView
@@ -27,6 +38,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:text="@{String.valueOf(list.totalItems)}"
             tools:text="0/0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -14,9 +14,14 @@
             android:id="@+id/action_overviewFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/detailFragment"
         android:name="khudiakov.kirill.sharedtodolist.detail.DetailFragment"
         android:label="detail_fragment"
-        tools:layout="@layout/detail_fragment" />
+        tools:layout="@layout/detail_fragment">
+        <argument
+            android:name="listId"
+            app:argType="long" />
+    </fragment>
 </navigation>
