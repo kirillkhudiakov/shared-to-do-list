@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditText
+        android:id="@+id/new_list_name"
+        android:hint="New to-do list name"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content" />
+</layout>

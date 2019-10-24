@@ -1,5 +1,6 @@
 package khudiakov.kirill.sharedtodolist.overview
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -12,12 +13,14 @@ class OverviewListAdapter :
     ListAdapter<TodoList, OverviewListAdapter.OverviewViewHolder>(TodoListDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OverviewViewHolder {
+        Log.i("OverviewListAdapter", "Created new view holder")
         return OverviewViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: OverviewViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+        Log.i("OverviewListAdapter", "Bind view holder")
     }
 
     class OverviewViewHolder private constructor(private val binding: OverviewListItemBinding) :
@@ -26,6 +29,7 @@ class OverviewListAdapter :
         fun bind(item: TodoList) {
             binding.listName.text = item.listName
             binding.listScore.text = item.totalItems.toString()
+            binding.executePendingBindings()
         }
 
         companion object {
@@ -40,10 +44,12 @@ class OverviewListAdapter :
 
 class TodoListDiffCallback : DiffUtil.ItemCallback<TodoList>() {
     override fun areItemsTheSame(oldItem: TodoList, newItem: TodoList): Boolean {
-        return oldItem.id == newItem.id
+        Log.i("OverviewListAdapter", "Items are the same = ${oldItem.id == newItem.id}")
+        return oldItem === newItem
     }
 
     override fun areContentsTheSame(oldItem: TodoList, newItem: TodoList): Boolean {
+        Log.i("OverviewListAdapter", "Contents are the same = ${oldItem == newItem}")
         return oldItem == newItem
     }
 

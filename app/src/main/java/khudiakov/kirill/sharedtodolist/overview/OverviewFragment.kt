@@ -1,7 +1,10 @@
 package khudiakov.kirill.sharedtodolist.overview
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import khudiakov.kirill.sharedtodolist.R
 import khudiakov.kirill.sharedtodolist.database.TodoDatabase
+import khudiakov.kirill.sharedtodolist.databinding.NewListDialogBinding
 import khudiakov.kirill.sharedtodolist.databinding.OverviewFragmentBinding
 
 class OverviewFragment : Fragment() {
@@ -42,8 +46,14 @@ class OverviewFragment : Fragment() {
         }
 
         viewModel.lists.observe(this, Observer {
+            Log.i("OverviewFragment", "List content has changed")
             viewAdapter.submitList(it)
         })
+
+        binding.fab.setOnClickListener {
+            val dialog = NewListDialog { viewModel.insertList(it) }
+            dialog.show(fragmentManager!!, "new_list_dialog")
+        }
 
         return binding.root
     }
