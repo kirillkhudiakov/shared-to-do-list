@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import khudiakov.kirill.sharedtodolist.util.ClickListener
 import khudiakov.kirill.sharedtodolist.database.TodoList
 import khudiakov.kirill.sharedtodolist.databinding.OverviewListItemBinding
+import khudiakov.kirill.sharedtodolist.util.DiffCallback
 
 class OverviewListAdapter(private val clickListener: ClickListener) :
-    ListAdapter<TodoList, OverviewListAdapter.OverviewViewHolder>(TodoListDiffCallback()){
+    ListAdapter<TodoList, OverviewListAdapter.OverviewViewHolder>(DiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OverviewViewHolder {
         return OverviewViewHolder.from(parent)
@@ -38,15 +39,4 @@ class OverviewListAdapter(private val clickListener: ClickListener) :
             }
         }
     }
-}
-
-class TodoListDiffCallback : DiffUtil.ItemCallback<TodoList>() {
-    override fun areItemsTheSame(oldItem: TodoList, newItem: TodoList): Boolean {
-        return oldItem === newItem
-    }
-
-    override fun areContentsTheSame(oldItem: TodoList, newItem: TodoList): Boolean {
-        return oldItem == newItem
-    }
-
 }
